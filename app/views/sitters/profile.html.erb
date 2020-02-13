@@ -1,0 +1,230 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container-fluid{
+            margin-top: 20px;
+            padding: 10px 20px;         
+        }
+        #logout_btn{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        #comp_button{
+            margin: 10px 0px;
+            background-color:#565b83;
+            color: #fdfdf9;
+        }
+        #add_rm_button{
+            margin: 10px 0px;
+            background-color:#7ba4bf;
+            color: #fdfdf9;
+            border: none;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        p span{
+            font-style: italic;
+            color: #5c5e77;
+            text-indent: 20pt;
+        }
+        h4 span{
+            color: #5c5e77;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 20px 10px 40px 0px;
+            letter-spacing: 1px;
+            font-style: normal;
+        }
+        #info{
+            width: 800px;
+            min-height: 500px;
+            display: inline-block;
+            vertical-align: top;
+            background-color: #f7f1e3;
+            margin: 0px 10px 0px 20px;
+            padding: 25px;
+        }
+        #compliment{
+            width: 300px;
+            min-height: 500px;
+            display: inline-block;
+            vertical-align: top;
+            background-color: #f7f1e3;
+            margin: 0px 10px;
+            padding: 60px 10px 0px;
+        }
+        img{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        .headline img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0px 10px 5px 0px;
+        }
+        .headline h1{
+            display: inline-block;
+        }
+        a{
+            color: #5c5e77;
+        }
+        .comps p:before{
+            content: '';
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-size: 30px;
+            background-image: url("<%= asset_path("star.png") %>");
+            background-repeat: no-repeat;
+            margin: 0px 5px -3px 0px;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        .nav-link{
+            color: #fdfdf9;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            padding: 10px 20px;
+        }
+        #profile_navlink{
+            color:#f85f5c;
+        }
+        #manage_navlink{
+            color:#edb367;
+        }
+        #edit_navlink{
+            color:#87bab0;
+        }
+        #dash_navlink{
+            color:#60658a;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <% if current_parent_user %>
+            <a class="navbar-brand" href="/parents/dashboard">FRIENDLY SITTER</a>
+        <% end %>
+        <% if current_sitter_user %>
+            <a class="navbar-brand" href="/sitters/dashboard">FRIENDLY SITTER</a>
+        <% end %>        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <% if current_sitter_user %>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/sitters/<%= current_sitter_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/sitters/network/<%= current_sitter_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/sitters/edit/<%= current_sitter_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/sitters/dashboard">DASHBOARD</a>
+                </li>
+                <% end %>
+                <% if current_parent_user %>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/parents/<%= current_parent_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/parents/network/<%= current_parent_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/parents/edit/<%= current_parent_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/parents/dashboard">DASHBOARD</a>
+                </li>
+                <% end %>
+            </ul>
+            <span class="navbar-text">
+                <% if current_sitter_user %>
+                    <form action="/sessions/destroy/sitter" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+                <% if current_parent_user %>
+                    <form action="/sessions/destroy/parent" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+            </span>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg" id="info">
+                <div class="headline">
+                    <img src="<%= asset_path("sitter.png") %>" alt="sitter">
+                    <h1><%= @sitter.first_name %> <%= @sitter.last_name %></h1>
+                </div>
+                <br>
+                <h4><%= @sitter.about %></h4>
+                <h6><%= @sitter.city %>, <%= @sitter.state %></h6>
+                <h6>Hourly Rate: $<%= @sitter.hourly_rate %></h6>
+                <% if current_parent_user && current_parent_user.sitters_hired.include?(@sitter) == false %>
+                <form action="/add/<%= @sitter.id %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <button type="submit" id="add_rm_button" class="btn btn-light" value="Add">ADD TO NETWORK</button>
+                </form>
+                <% end %>
+                <br>
+                <div class="comps">
+                    <% @compliments.each do |compliment| %>
+                        <p><span><a href="/parents/<%= compliment.parent.id %>"> <%= compliment.parent.first_name %></a> says</span> "<%= compliment.content %>"</p>
+                    <% end %>
+                </div>
+            </div>
+            <% if current_parent_user && @sitter.parents_who_hired.include?(current_parent_user) == true %>
+            <div class="col-lg-3" id="compliment">
+                <h4><span>ENJOYING THIS SITTER?</span></h4>
+                <form action="/compliments/new/<%= @sitter.id %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <div class="form-group">
+                        <label for="Content">Write a compliment for other parents to see</label>                     
+                        <textarea name="compliment[content]" class="form-control" id="Content" rows="10"></textarea>
+                    </div>
+                        <button type="submit" class="btn btn-light" id="comp_button" value="Submit">Submit</button>
+                </form>
+                <% if flash[:errors] %>
+                    <% flash[:errors].each do |e| %>
+                        <p><%= e %></p>
+                    <% end %>
+                <% end %>
+                <br>
+                </div>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</body>

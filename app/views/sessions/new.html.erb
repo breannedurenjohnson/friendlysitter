@@ -1,0 +1,82 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container{
+            margin-top:20px;
+            padding: 10px 20px; 
+        }
+        .btn-light{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .jumbotron{
+            background-color: #f7f1e3;
+        }
+        .jumbotron h1{
+            font-weight: bold;
+            color:#7ba4bf;
+            font-size: 36pt;
+            letter-spacing: 1px;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #4c4e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        #navlink{
+            color:#edb367;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">FRIENDLY SITTER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <span class="navbar-text">
+            <a class="nav-link" id="navlink" href="/sitters/new">SITTER REGISTRATION</a>
+        </span>
+        <span class="navbar-text">
+            <a class="nav-link" id="navlink" href="/parents/new">PARENT REGISTRATION</a>
+        </span>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>FRIENDLY SITTER</h1>
+            <br>
+            <form action="/sessions/new" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-4 col-form-label">Email</label>                     
+                    <input type="text" name="email" id="Email">
+                </div>
+                <div class="form-group row">
+                    <label for="Password" class="col-sm-4 col-form-label">Password</label>                     
+                    <input type="password" name="password" id="Password">
+                </div>
+                <button type="submit" class="btn btn-light" value="Log In">LOG IN</button>
+            </form>
+            <br>
+            <%= flash[:errors] %>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,352 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container-fluid{
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+        #logout_btn{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .btn-light{
+            background-color:#fdfdf9;
+            color: #f7f1e3;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        #add_rm_button{
+            margin: 10px 0px;
+            background-color:#7ba4bf;
+            color: #fdfdf9;
+            border: none;
+        }
+        span{
+            color: #5c5e77;
+            font-style: italic;
+            font-size: 9pt;
+        }
+        a span{
+            color: #87bab0;
+            font-weight: bold;
+            font-size: 10pt;
+            font-style: normal;
+        }
+        h3 span{
+            color: #edb367;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            font-style: normal;
+        }
+        h6 span{
+            color: #edb367;
+            text-align: center;
+            font-weight: normal;
+            font-size: 12pt;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        .list-inline-item{
+            margin: 10px 20px;
+        }
+        #friends{
+            width: 300px;
+            min-height: 500px;
+            display: inline-block;
+            vertical-align: top;
+            background-color: #f7f1e3;
+            margin: 0px 10px;
+            padding: 10px;
+        }
+        #sitters{
+            width: 800px;
+            min-height: 500px;
+            display: inline-block;
+            vertical-align: top;
+            background-color: #f7f1e3;
+            margin: 0px 10px 0px 20px;
+            padding: 20px;
+        }
+        #ur_friends{
+            color: #5c5e77;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 10px 10px 10px 10px;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        img{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        .do_you_know{
+            margin: 10px 0px 0px 30px;
+        }
+        #fr_text{
+            display: inline-block;
+            vertical-align: center;
+        }
+        #fr_text p{
+            margin: 0px;
+        }
+        #friends img{
+            width: 25px;
+            height: 25px;
+            margin: -25px 5px 0px 5px;
+            vertical-align: center;
+        }
+        h6{
+            color: #5c5e77;
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 20px 10px 20px 10px;
+        }
+        th{
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        #friends h5{
+            color: #edb367;
+            font-size: 10pt;
+            font-weight: bold;
+            margin: 20px 10px 20px 10px;
+        }
+        h4{
+            color: #edb367;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 20px 10px 40px 10px;
+            letter-spacing: 1px;
+        }
+        .headline img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .headline h1{
+            display: inline-block;
+        }
+        a{
+            color: #5c5e77;
+        }
+        tr{
+            border-color: #e6cde6;
+            color: #5c5e77;
+        }
+        .card{
+            background-color: #f7f1e3;
+            margin: 5px 10px;
+            min-width: 275px;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        td span{
+            color: #5c5e77;
+            position: relative;
+            top: 10px;
+            font-style: normal;
+            font-size: 12pt;
+        }
+        #sitters li{
+            list-style: none;
+        }
+        #sitters img{
+            display: inline-block;
+        }
+        #friends li img{
+            width: 25px;
+            height: 25px;
+        }
+        .nav-link{
+            color: #fdfdf9;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            padding: 10px 20px;
+        }
+        #profile_navlink{
+            color:#f85f5c;
+        }
+        #manage_navlink{
+            color:#edb367;
+        }
+        #edit_navlink{
+            color:#87bab0;
+        }
+        #dash_navlink{
+            color:#60658a;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/parents/dashboard">FRIENDLY SITTER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/parents/<%= current_parent_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/parents/network/<%= current_parent_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/parents/edit/<%= current_parent_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/parents/dashboard">DASHBOARD</a>
+                </li>                
+            </ul>
+            <span class="navbar-text">
+                <% if current_parent_user %>
+                    <form action="/sessions/destroy/parent" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+            </span>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2.5" id="friends">
+                <% @parents.each do |parent| %>
+                    <% if Friendship.where(friend: current_parent_user).where(parent: parent).count == 0 && Friendship.where(friend: parent).where(parent: current_parent_user).count == 1 %>
+                    <h5>PENDING FRIEND REQUEST</h5>
+                    <div class="do_you_know">
+                        <img src="<%= asset_path("parent.png") %>" alt="parent">
+                        <div id="fr_text">
+                            <p><a href="/parents/<%= parent.id %>"><%= parent.first_name %> <%= parent.last_name %></a></p>
+                            <p><span><%= parent.city %>, <%= parent.state %></span></p>
+                        </div>
+                    </div>                 
+                    <% end %>
+                <% end %>                
+                <h6>DO YOU KNOW THESE PARENTS?</h6>
+                <% @not_friends.each do |parent| %>
+                    <div class="do_you_know">
+                        <% if current_parent_user.friends.include?(parent) == false %>
+                            <img src="<%= asset_path("parent.png") %>" alt="parent">
+                            <div id="fr_text">
+                                <p><a href="/parents/<%= parent.id %>"><%= parent.first_name %> <%= parent.last_name %></a></p>
+                                <p><span><%= parent.city %>, <%= parent.state %></span></p>
+                            </div>
+                        <% end %>
+                    </div>
+                    <br>
+                <% end %>
+            </div>
+            <div class="col-lg" id="sitters">
+                <div class="headline">
+                    <img src="<%= asset_path("parent.png") %>" alt="parent">
+                    <h1>Welcome, <%= current_parent_user.first_name %></h1>
+                </div>
+                <br>
+                <h4>MANAGE YOUR NETWORK</h4>
+                <h6>YOUR SITTERS</h6>
+                <% if current_parent_user.sitters_hired.count == 0 %>
+                    <h6><span>No sitters in your network quite yet.</span></h6>
+                    <br>
+                <% else %>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>LOCATION</th>
+                        <th>YOU KNOW THIS SITTER THROUGH</th>
+                        <th>ACTION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% current_parent_user.sitters_hired.each do |sitter| %>
+                            <tr>
+                                <td><img src="<%= asset_path("sitter.png") %>" alt="sitter"> <a href="/sitters/<%= sitter.id %>"><%= sitter.first_name %> <%= sitter.last_name %></a></td>
+                                <td><span><%= sitter.city %>, <%= sitter.state %></span></td>
+                                <td>
+                                <ul class="list-inline">
+                                <% sitter.parents_who_hired.each do |parent| %>
+                                    <% if parent.friends.exists?(current_parent_user)%>
+                                    <span><li class="list-inline-item"><a href="/parents/<%= parent.id %>"><%= parent.first_name %></a></li></span>
+                                    <% end %>
+                                <% end %>
+                                </td>
+                                <td>
+                                <% if sitter.parents_who_hired.include?(current_parent_user) == true %>
+                                    <form action="/remove/<%= sitter.id %>" method="post">
+                                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <button type="submit" id="add_rm_button" class="btn btn-light" value="Remove">REMOVE</button>
+                                    </form>
+                                <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <% end %>
+                <h6>SITTERS TO CONSIDER</h6>
+                <table class="table">
+                    <tbody>
+                        <% @sitters.each do |sitter| %>
+                            <tr>
+                            <% if sitter.parents_who_hired.include?(current_parent_user) == false%>
+                                <td><img src="<%= asset_path("sitter.png") %>" alt="sitter"> <a href="/sitters/<%= sitter.id %>"><%= sitter.first_name %> <%= sitter.last_name %></a></td>
+                                <td><span><%= sitter.city %>, <%= sitter.state %></span></td>
+                                <td>
+                                <ul class="list-inline">
+                                <% sitter.parents_who_hired.each do |parent| %>
+                                    <% if parent.friends.exists?(current_parent_user)%>
+                                    <span><li class="list-inline-item"><a href="/parents/<%= parent.id %>"><%= parent.first_name %></a></li></span>
+                                    <% end %>
+                                <% end %>
+                                </td>
+                                <td>                               
+                                <td>
+                                <form action="/sitters/<%= sitter.id %>" method="get">
+                                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                    <button type="submit" id="logout_btn" class="btn btn-light">SEE PROFILE</button>
+                                </form>
+                                </td>                            
+                                <% end %>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <br>
+                <h4 id="ur_friends">YOUR FRIENDS</h4>
+                <ul class="list-inline">
+                <% current_parent_user.friends.each do |friend| %>
+                    <% if friend.friends.include?(current_parent_user) == true %>
+                    <li class="list-inline-item"><img src="<%= asset_path("parent.png") %>" alt="parent"> <p><a href="/parents/<%= friend.id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+                    <% end %>
+                <% end %>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+</body>

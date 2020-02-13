@@ -1,0 +1,286 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container{
+            margin-top: 20px;
+            padding: 10px 20px;            
+        }
+        #logout_btn{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .btn-light{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        #add_rm_button{
+            margin: 10px 0px;
+            background-color:#7ba4bf;
+            color: #fdfdf9;
+            border: none;
+        }
+        h5 span{
+            color: #5c5e77;
+            font-style: italic;
+            font-size: 12pt;
+        }
+        h4{
+            color: #5c5e77;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 20px 10px 20px 10px;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        p span{
+            color: #edb367;
+            text-align: center;
+        }
+        a span{
+            color: #edb367;
+            font-weight: bold;
+            font-size: 10pt;
+            font-style: normal;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        span{
+            font-style: italic;
+            color: white;
+        }
+        .jumbotron{
+            background-color: #f7f1e3;
+            padding-top: 30px;
+        }
+        h1{
+            margin: 0px;
+        }
+        img{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        .headline img{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0px 10px 5px 0px;
+        }
+        .headline_text{
+            display: block;
+        }
+        a{
+            color: #5c5e77;
+        }
+        .card{
+            background-color: #f7f1e3;
+            margin: 5px 10px;
+            min-width: 275px;
+            border: none;
+        }
+        .list-inline-item{
+            margin: 10px 20px;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        .nav-link{
+            color: #fdfdf9;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            border-radius: 5%;
+        }
+        #profile_navlink{
+            color:#f85f5c;
+        }
+        #manage_navlink{
+            color:#edb367;
+        }
+        #edit_navlink{
+            color:#87bab0;
+        }
+        #dash_navlink{
+            color:#60658a;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <% if current_parent_user %>
+            <a class="navbar-brand" href="/parents/dashboard">FRIENDLY SITTER</a>
+        <% end %>
+        <% if current_sitter_user %>
+            <a class="navbar-brand" href="/sitters/dashboard">FRIENDLY SITTER</a>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <% if current_sitter_user %>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/sitters/<%= current_sitter_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/sitters/network/<%= current_sitter_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/sitters/edit/<%= current_sitter_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/sitters/dashboard">DASHBOARD</a>
+                </li>
+                <% end %>
+                <% if current_parent_user %>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/parents/<%= current_parent_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/parents/network/<%= current_parent_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/parents/edit/<%= current_parent_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/parents/dashboard">DASHBOARD</a>
+                </li>
+                <% end %>
+            </ul>
+            <span class="navbar-text">
+                <% if current_parent_user %>
+                    <form action="/sessions/destroy/parent" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+                <% if current_sitter_user %>
+                    <form action="/sessions/destroy/sitter" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+            </span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="headline">
+                <img src="<%= asset_path("parent.png") %>" alt="parent">
+                <div class="headline_text">
+                    <h1><%= @parent.first_name %> <%= @parent.last_name %></h1>
+                    <h5><span><%= @parent.city %>, <%= @parent.state %></span></h5>
+                    <h5>"<%= @parent.about %>"</h5>
+                </div>
+            </div>
+            <br>
+            <% if @parent.friends.include?(current_parent_user) == false && current_parent_user.friends.include?(@parent) == true  %>
+                <p><span>✓ Friend Request Sent</span></p>
+            <% end %>
+            <% if @parent.friends.include?(current_parent_user) == false && @parent != current_parent_user  && current_parent_user.friends.include?(@parent) == false %>
+                <form action="/friends/request/<%= @parent.id %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <button type="submit" id="add_rm_button" class="btn btn-light" value="Add Friend">SEND FRIEND REQUEST</button>
+                </form>
+            <% end %>
+            <% if Friendship.where(friend: @parent).where(parent: current_parent_user).count == 0 && Friendship.where(friend: current_parent_user).where(parent: @parent).count == 1 %>
+                <form action="/friends/accept/<%= @parent.id %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <button type="submit" class="btn btn-light" value="Add Friend">ACCEPT FRIEND REQUEST</button>
+                </form>
+            <% end %>
+            <h4>SITTERS</h4>
+            <% if @parent == current_parent_user && @parent.sitters_hired.count == 0 %>
+                <p><span>No sitters in your network quite yet.</span></p>
+            <% end %>
+            <% if @parent.friends.include?(current_parent_user) == true && current_parent_user.friends.include?(@parent) == true %>
+                <% if @parent.sitters_hired.count == 0 %>
+                    <% if @parent == current_parent_user %>
+                        <p><span>No sitters in <%= @parent.first_name %>'s network quite yet.</span></p>
+                    <% end %>
+                <% else %>
+                    <div class="card-group">
+                    <% @parent.sitters_hired.each do |sitter| %>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><img src="<%= asset_path("sitter.png") %>" alt="sitter"> <a href="/sitters/<%= sitter.id %>"><%= sitter.first_name %></a></h5>
+                                <p class="card-text">"<%= sitter.about %>"</p>
+                                <p class="card-text"><small class="text-muted"><%= sitter.city %>, <%= sitter.state %></small></p>
+                                <% if current_parent_user && current_parent_user.sitters_hired.include?(sitter) == true %>
+                                    <a href="/parents/network/<%= @parent.id %>"><span>✓ IN YOUR NETWORK</span></a>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                    </div>
+                <% end %>
+            <% elsif @parent.friends.include?(current_parent_user) == false || current_parent_user.friends.include?(@parent) == false %>
+                <% if @parent != current_parent_user %>
+                    <p><span>You must be friends with <%= @parent.first_name %> to have access to their sitter network.</span></p>
+                <% else %>
+                    <div class="card-group">
+                    <% @parent.sitters_hired.each do |sitter| %>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><img src="<%= asset_path("sitter.png") %>" alt="sitter"> <a href="/sitters/<%= sitter.id %>"><%= sitter.first_name %></a></h5>
+                                <p class="card-text">"<%= sitter.about %>"</p>
+                                <p class="card-text"><small class="text-muted"><%= sitter.city %>, <%= sitter.state %></small></p>
+                            </div>
+                        </div>
+                    <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+            <br>
+            <% if @parent != current_parent_user %>
+                <h4>MUTUAL FRIENDS</h4>
+                <ul class="list-inline">
+                <% @parent.friends.each do |friend| %>
+                    <% if current_parent_user.friends.include?(friend) == true && friend.friends.include?(current_parent_user) == true %>
+                        <li class="list-inline-item"><img src="<%= asset_path("parent.png") %>" alt="parent"> <p><a href="/parents/<%= friend.id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+                    <% end %>
+                <% end %>
+                </ul>
+                <br>
+                <h4>FRIENDS</h4>
+                <ul class="list-inline">
+                <% @parent.friends.each do |friend| %>
+                    <% if friend.friends.include?(@parent) == true && current_parent_user.friends.include?(friend) == false %>
+                        <li class="list-inline-item"><img src="<%= asset_path("parent.png") %>" alt="parent"> <p><a href="/parents/<%= friend.id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+                    <% end %>
+                <% end %>
+                </ul>
+            <br>
+            <% elsif @parent == current_parent_user %>
+                <h4>FRIENDS</h4>
+                <ul class="list-inline">
+                <% @parent.friends.each do |friend| %>
+                    <% if friend.friends.include?(@parent) == true %>
+                    <li class="list-inline-item"><img src="<%= asset_path("parent.png") %>" alt="parent"> <p><a href="/parents/<%= friend.id %>"><%= friend.first_name %> <%= friend.last_name %></a></li>
+                    <% end %>
+                <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</body>

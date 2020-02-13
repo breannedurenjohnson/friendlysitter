@@ -1,0 +1,142 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container{
+            margin-top: 20px;
+            padding: 10px 20px;            
+        }
+        #logout_btn{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        span{
+            color: red;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        span{
+            font-style: italic;
+            color: white;
+        }
+        h4{
+            color: #87bab0;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 20px 10px 40px 0px;
+            letter-spacing: 1px;
+        }
+        .jumbotron{
+            background-color: #f7f1e3;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        .nav-link{
+            color: #fdfdf9;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            padding: 10px 20px;
+        }
+        #profile_navlink{
+            color:#f85f5c;
+        }
+        #manage_navlink{
+            color:#edb367;
+        }
+        #edit_navlink{
+            color:#87bab0;
+        }
+        #dash_navlink{
+            color:#60658a;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/sitters/dashboard">FRIENDLY SITTER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile_navlink" href="/sitters/<%= current_sitter_user.id %>">MY PROFILE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="manage_navlink" href="/sitters/network/<%= current_sitter_user.id %>">MANAGE NETWORK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="edit_navlink" href="/sitters/edit/<%= current_sitter_user.id %>">EDIT ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="dash_navlink" href="/sitters/dashboard">DASHBOARD</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <% if current_sitter_user %>
+                    <form action="/sessions/destroy/sitter" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" id="logout_btn" class="btn btn-light" value="Log Out">LOG OUT</button>
+                    </form>
+                <% end %>
+            </span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <h4>EDIT YOUR PROFILE</h4>
+            <form action="/sitters/edit/<%= current_sitter_user.id %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="patch">
+                <div class="form-group row">
+                    <label for="First Name" class="col-sm-4 col-form-label">First Name</label>
+                    <input type="text" class="col-lg-4" name="sitter[first_name]" id="First Name" value="<%= current_sitter_user.first_name %>">
+                </div>
+                <div class="form-group row">
+                    <label for="Last Name" class="col-sm-4 col-form-label">Last Name</label>
+                    <input type="text" class="col-lg-4" name="sitter[last_name]" id="Last Name" value="<%= current_sitter_user.last_name %>">
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-4 col-form-label">Email</label>                    
+                    <input type="text" class="col-lg-4"name="sitter[email]" id="Email" value="<%= current_sitter_user.email %>">
+                </div>
+                <div class="form-group row">
+                    <label for="City" class="col-sm-4 col-form-label">City</label>                    
+                    <input type="text" class="col-lg-4" name="sitter[city]" id="City" value="<%= current_sitter_user.city %>">
+                </div>
+                <div class="form-group row">
+                    <label for="State" class="col-sm-4 col-form-label">State</label>                    
+                    <input type="text" class="col-lg-4" name="sitter[state]" id="State" value="<%= current_sitter_user.state %>">
+                </div>
+                <div class="form-group row">
+                    <label for="Hourly Rate" class="col-sm-4 col-form-label">Hourly Rate</label>                    
+                    <input type="text" class="col-lg-4" name="sitter[hourly_rate]" id="Hourly Rate" value="<%= current_sitter_user.hourly_rate %>">
+                </div>
+                <div class="form-group row">
+                    <label for="About" class="col-sm-4 col-form-label">About Your Family</label>                     
+                    <textarea type="text" class="col-lg-4" name="sitter[about]" id="About" rows="5"><%= current_sitter_user.about %></textarea>
+                </div>
+                <button type="submit" class="btn btn-light" value="Update">Update</button>
+            </form>
+            <% if flash[:errors] %>
+                <% flash[:errors].each do |e| %>
+                    <p><%= e %></p>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</body>

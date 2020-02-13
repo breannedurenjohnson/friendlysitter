@@ -1,0 +1,28 @@
+Rails.application.routes.draw do
+  get "/" => "sessions#new"
+  post "sessions/new" => "sessions#create"
+  get "parents/new" => "parents#new"
+  get "sitters/new" => "sitters#new"
+  post "parents/new" => "parents#create"
+  post "sitters/new" => "sitters#create"
+  get "parents/dashboard" => "parents#dashboard"
+  get "sitters/dashboard" => "sitters#dashboard"
+  get "parents/:parent_id" => "parents#profile"
+  get "sitters/:sitter_id" => "sitters#profile"
+  get "parents/network/:parent_id" => "parents#network"
+  get "sitters/network/:sitter_id" => "sitters#network"
+  get "parents/edit/:parent_id" => "parents#edit"
+  patch "parents/edit/:parent_id" => "parents#update"
+  get "sitters/edit/:sitter_id" => "sitters#edit"
+  patch "sitters/edit/:sitter_id" => "sitters#update"
+  post "friends/request/:parent_id" => "friendships#friend_request"
+  post "friends/accept/:parent_id" => "friendships#accept_request"
+  delete "friends/remove/:parent_id" => "friendships#remove_friend"
+  post "add/:sitter_id" => "hires#add_sitter"
+  delete "remove/:sitter_id" => "hires#remove_sitter"
+  post "compliments/new/:sitter_id" => "compliments#create"
+  delete "sessions/destroy/parent" => "sessions#parent_destroy"
+  delete "sessions/destroy/sitter" => "sessions#sitter_destroy"
+
+  match '*path' => redirect('/'), via: :get
+end

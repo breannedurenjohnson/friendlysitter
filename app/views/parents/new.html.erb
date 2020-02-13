@@ -1,0 +1,121 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .container{
+            margin-top: 20px;
+            padding: 10px 20px;            
+        }
+        .btn-light{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .jumbotron{
+            background-color: #f7f1e3;
+            padding-top:30px;
+        }
+        .jumbotron h1{
+            font-weight: bold;
+            color:#7ba4bf;
+            font-size: 36pt;
+            letter-spacing: 1px;
+        }
+        body{
+            background-color:#fdfdf9;
+            color: #5c5e77;
+            background-image: repeating-linear-gradient(135deg, #fdfdf9, #fdfdf9 2px, #f7f1e3 2px, #f7f1e3 4px)!important;
+        }
+        a{
+            color: #5c5e77;
+        }
+        .navbar.navbar-expand-lg.navbar-light.bg-light{
+            background-color: #fdfdf9!important;
+            border-bottom: 1px solid #e8e9ef;
+        }
+        .navbar-brand{
+            font-weight: bold;
+            color:#7ba4bf!important;
+            letter-spacing: 1px;
+        }
+        #navlink{
+            color:#edb367;
+            font-weight: bold;
+            font-size: 10pt;
+            letter-spacing: 1px;
+            margin: 0px 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">FRIENDLY SITTER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <span class="navbar-text">
+            <a class="nav-link" id="navlink" href="/sitters/new">SITTER REGISTRATION</a>
+        </span>
+        <span class="navbar-text">
+            <a class="nav-link" id="navlink" href="/">BACK TO LOG IN</a>
+        </span>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>PARENT REGISTRATION</h1>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <form action="/parents/new" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <div class="form-group row">
+                            <label for="First Name" class="col-sm-5 col-form-label">First Name</label>
+                            <input type="text" class="col-md" name="parent[first_name]" id="First Name">
+                        </div>
+                        <div class="form-group row">
+                            <label for="Last Name" class="col-sm-5 col-form-label">Last Name</label>
+                            <input type="text" class="col-md" name="parent[last_name]" id="Last Name">
+                        </div>
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-5 col-form-label">Email</label>                    
+                            <input type="text" class="col-md" name="parent[email]" id="Email">
+                        </div>
+                        <div class="form-group row">
+                            <label for="Password" class="col-sm-5 col-form-label">Password</label>                     
+                            <input type="password" class="col-md" name="parent[password]" id="Password">
+                        </div>
+                        <div class="form-group row">
+                            <label for="Password_Confirmation" class="col-sm-5 col-form-label">Confirm Password</label>                     
+                            <input type="password" class="col-md" name="parent[password_confirmation]" id="Password_Confirmation">
+                        </div>
+                        <div class="form-group row">
+                            <label for="City" class="col-sm-5 col-form-label">City</label>                     
+                            <input type="text" class="col-md" name="parent[city]" id="City">
+                        </div>
+                        <div class="form-group row">
+                            <label for="State" class="col-sm-5 col-form-label">State</label>                     
+                            <input type="text" class="col-md" name="parent[state]" id="State">
+                        </div>
+                        <div class="form-group row">
+                            <label for="About" class="col-sm-5 col-form-label">Tell Us A Little About Your Family</label>                     
+                            <textarea type="text" class="col-md" name="parent[about]" id="About" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-light" value="Register">REGISTER</button>
+                    </form>
+                    <br>
+                    <a href="/">Already a member?</a>
+                </div>
+                <div class="col-sm-5">
+                    <% if flash[:errors] %>
+                        <% flash[:errors].each do |e| %>
+                            <p><%= e %></p>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
