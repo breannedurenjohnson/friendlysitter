@@ -12,7 +12,7 @@ gem 'rails'
 gem 'pg'
 gem 'bcrypt', '~> 3.1.7'
 gem 'hirb'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem "mini_magick"
 gem 'geokit-rails'
 gem 'left_joins'
